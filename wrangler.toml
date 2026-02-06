@@ -1,0 +1,25 @@
+# wrangler.toml
+# （放在项目根目录：和 package.json、next.config.js 同级）
+
+$schema = "./node_modules/wrangler/config-schema.json"
+
+name = "real-time-fund"              # 如果提示重名，就改成你自己的唯一名字
+compatibility_date = "2026-02-06"
+
+# ✅ 方案A：只托管静态站点（不写 main，也不需要任何 Worker 代码）
+# 说明：不匹配到文件时，按 not_found_handling 决定怎么处理（下面配置为 SPA 回退到 /index.html）
+# 如果你不想 SPA 回退，可以把 not_found_handling 改成 "404-page"
+[assets]
+directory = "./out"
+not_found_handling = "single-page-application"
+
+
+# ------------------------------
+# ✅ 方案B（可选）：如果你还想加 /api 等逻辑，再启用 main + binding
+# 做法：把下面两行取消注释，并新建一个 worker.js（示例我也给你）
+#
+# main = "worker.js"
+# [assets]
+# directory = "./out"
+# binding = "ASSETS"
+# not_found_handling = "single-page-application"
