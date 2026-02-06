@@ -135,7 +135,7 @@ function CalendarIcon(props) {
 function DatePicker({ value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(() => value ? new Date(value) : new Date());
-  
+
   // 点击外部关闭
   useEffect(() => {
     const close = () => setIsOpen(false);
@@ -159,12 +159,12 @@ function DatePicker({ value, onChange }) {
   const handleSelect = (e, day) => {
     e.stopPropagation();
     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    
+
     // 检查是否是未来日期
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const selectedDate = new Date(dateStr);
-    
+
     if (selectedDate > today) return; // 禁止选择未来日期
 
     onChange(dateStr);
@@ -174,19 +174,19 @@ function DatePicker({ value, onChange }) {
   // 生成日历数据
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDayOfWeek = new Date(year, month, 1).getDay(); // 0(Sun)-6(Sat)
-  
+
   const days = [];
   for (let i = 0; i < firstDayOfWeek; i++) days.push(null);
   for (let i = 1; i <= daysInMonth; i++) days.push(i);
 
   return (
     <div className="date-picker" style={{ position: 'relative' }} onClick={(e) => e.stopPropagation()}>
-      <div 
-        className="input-trigger" 
+      <div
+        className="input-trigger"
         onClick={() => setIsOpen(!isOpen)}
-        style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
+        style={{
+          display: 'flex',
+          alignItems: 'center',
           justifyContent: 'space-between',
           padding: '0 12px',
           height: '40px',
@@ -224,16 +224,16 @@ function DatePicker({ value, onChange }) {
             <div className="calendar-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
               <button onClick={handlePrevMonth} className="icon-button" style={{ width: 24, height: 24 }}>&lt;</button>
               <span style={{ fontWeight: 600 }}>{year}年 {month + 1}月</span>
-              <button 
-                onClick={handleNextMonth} 
-                className="icon-button" 
+              <button
+                onClick={handleNextMonth}
+                className="icon-button"
                 style={{ width: 24, height: 24 }}
                 // 如果下个月已经是未来，可以禁用（可选，这里简单起见不禁用翻页，只禁用日期点击）
               >
                 &gt;
               </button>
             </div>
-            
+
             <div className="calendar-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 4, textAlign: 'center' }}>
               {['日', '一', '二', '三', '四', '五', '六'].map(d => (
                 <div key={d} className="muted" style={{ fontSize: '12px', marginBottom: 4 }}>{d}</div>
@@ -247,9 +247,9 @@ function DatePicker({ value, onChange }) {
                 const current = new Date(dateStr);
                 const isToday = current.getTime() === today.getTime();
                 const isFuture = current > today;
-                
+
                 return (
-                  <div 
+                  <div
                     key={i}
                     onClick={(e) => !isFuture && handleSelect(e, d)}
                     style={{
@@ -326,12 +326,12 @@ function DonateTabs() {
         </button>
       </div>
 
-      <div 
-        style={{ 
-          width: 200, 
-          height: 200, 
-          background: 'white', 
-          borderRadius: 12, 
+      <div
+        style={{
+          width: 200,
+          height: 200,
+          background: 'white',
+          borderRadius: 12,
           padding: 8,
           display: 'flex',
           alignItems: 'center',
@@ -339,16 +339,16 @@ function DonateTabs() {
         }}
       >
         {method === 'alipay' ? (
-          <img 
-            src={zhifubaoImg.src} 
-            alt="支付宝收款码" 
-            style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+          <img
+            src={zhifubaoImg.src}
+            alt="支付宝收款码"
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
           />
         ) : (
-          <img 
-            src={weixinImg.src} 
-            alt="微信收款码" 
-            style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+          <img
+            src={weixinImg.src}
+            alt="微信收款码"
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
           />
         )}
       </div>
@@ -427,7 +427,7 @@ function FeedbackModal({ onClose }) {
     if (!nickname) {
       formData.set("nickname", "匿名");
     }
-    
+
     // Web3Forms Access Key
     formData.append("access_key", "c390fbb1-77e0-4aab-a939-caa75edc7319");
     formData.append("subject", "基估宝 - 用户反馈");
@@ -529,16 +529,16 @@ function FeedbackModal({ onClose }) {
 
             <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid var(--border)', textAlign: 'center' }}>
               <p className="muted" style={{ fontSize: '12px', lineHeight: '1.6' }}>
-                如果您有 Github 账号，也可以在本项目 
-                <a 
-                  href="https://github.com/hzm0321/real-time-fund/issues" 
-                  target="_blank" 
+                如果您有 Github 账号，也可以在本项目
+                <a
+                  href="https://github.com/hzm0321/real-time-fund/issues"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="link-button"
                   style={{ color: 'var(--primary)', textDecoration: 'underline', padding: '0 4px', fontWeight: 600 }}
                 >
                   Issues
-                </a> 
+                </a>
                 区留言互动
               </p>
             </div>
@@ -578,7 +578,7 @@ function HoldingActionModal({ fund, onClose, onAction }) {
             <CloseIcon width="20" height="20" />
           </button>
         </div>
-        
+
         <div style={{ marginBottom: 20, textAlign: 'center' }}>
           <div className="fund-name" style={{ fontWeight: 600, fontSize: '16px', marginBottom: 4 }}>{fund?.name}</div>
           <div className="muted" style={{ fontSize: '12px' }}>#{fund?.code}</div>
@@ -594,13 +594,13 @@ function HoldingActionModal({ fund, onClose, onAction }) {
           <button className="button col-12" onClick={() => onAction('edit')} style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--text)' }}>
             编辑持仓
           </button>
-          <button 
-            className="button col-12" 
-            onClick={() => onAction('clear')} 
-            style={{ 
-              marginTop: 8, 
-              background: 'linear-gradient(180deg, #ef4444, #f87171)', 
-              border: 'none', 
+          <button
+            className="button col-12"
+            onClick={() => onAction('clear')}
+            style={{
+              marginTop: 8,
+              background: 'linear-gradient(180deg, #ef4444, #f87171)',
+              border: 'none',
               color: '#2b0b0b',
               fontWeight: 600
             }}
@@ -680,7 +680,7 @@ function TradeModal({ type, fund, onClose, onConfirm }) {
             <CloseIcon width="20" height="20" />
           </button>
         </div>
-        
+
         <div style={{ marginBottom: 16 }}>
           <div className="fund-name" style={{ fontWeight: 600, fontSize: '16px', marginBottom: 4 }}>{fund?.name}</div>
           <div className="muted" style={{ fontSize: '12px' }}>#{fund?.code}</div>
@@ -801,9 +801,9 @@ function TradeModal({ type, fund, onClose, onConfirm }) {
 
           <div className="row" style={{ gap: 12, marginTop: 12 }}>
             <button type="button" className="button secondary" onClick={onClose} style={{ flex: 1, background: 'rgba(255,255,255,0.05)', color: 'var(--text)' }}>取消</button>
-            <button 
-              type="submit" 
-              className="button" 
+            <button
+              type="submit"
+              className="button"
               disabled={!isValid}
               style={{ flex: 1, opacity: isValid ? 1 : 0.6 }}
             >
@@ -818,10 +818,10 @@ function TradeModal({ type, fund, onClose, onConfirm }) {
 
 function HoldingEditModal({ fund, holding, onClose, onSave }) {
   const [mode, setMode] = useState('amount'); // 'amount' | 'share'
-  
+
   // 基础数据
   const dwjz = fund?.dwjz || fund?.gsz || 0;
-  
+
   // 表单状态
   const [share, setShare] = useState('');
   const [cost, setCost] = useState('');
@@ -835,7 +835,7 @@ function HoldingEditModal({ fund, holding, onClose, onSave }) {
       const c = holding.cost || 0;
       setShare(String(s));
       setCost(String(c));
-      
+
       if (dwjz > 0) {
         const a = s * dwjz;
         const p = (dwjz - c) * s;
@@ -849,7 +849,7 @@ function HoldingEditModal({ fund, holding, onClose, onSave }) {
   const handleModeChange = (newMode) => {
     if (newMode === mode) return;
     setMode(newMode);
-    
+
     if (newMode === 'share') {
       // 从金额/收益 -> 份额/成本
       if (amount && dwjz > 0) {
@@ -858,7 +858,7 @@ function HoldingEditModal({ fund, holding, onClose, onSave }) {
         const s = a / dwjz;
         const principal = a - p;
         const c = s > 0 ? principal / s : 0;
-        
+
         setShare(s.toFixed(2)); // 保留2位小数，或者更多？基金份额通常2位
         setCost(c.toFixed(4));
       }
@@ -869,7 +869,7 @@ function HoldingEditModal({ fund, holding, onClose, onSave }) {
         const c = parseFloat(cost || 0);
         const a = s * dwjz;
         const p = (dwjz - c) * s;
-        
+
         setAmount(a.toFixed(2));
         setProfit(p.toFixed(2));
       }
@@ -878,7 +878,7 @@ function HoldingEditModal({ fund, holding, onClose, onSave }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     let finalShare = 0;
     let finalCost = 0;
 
@@ -902,7 +902,7 @@ function HoldingEditModal({ fund, holding, onClose, onSave }) {
     onClose();
   };
 
-  const isValid = mode === 'share' 
+  const isValid = mode === 'share'
     ? (share && cost && !isNaN(share) && !isNaN(cost))
     : (amount && !isNaN(amount) && (!profit || !isNaN(profit)) && dwjz > 0);
 
@@ -934,7 +934,7 @@ function HoldingEditModal({ fund, holding, onClose, onSave }) {
             <CloseIcon width="20" height="20" />
           </button>
         </div>
-        
+
         <div style={{ marginBottom: 16 }}>
           <div className="fund-name" style={{ fontWeight: 600, fontSize: '16px', marginBottom: 4 }}>{fund?.name}</div>
           <div className="row" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
@@ -980,7 +980,7 @@ function HoldingEditModal({ fund, holding, onClose, onSave }) {
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   placeholder="请输入持有总金额"
-                  style={{ 
+                  style={{
                     width: '100%',
                     border: !amount ? '1px solid var(--danger)' : undefined
                   }}
@@ -1014,7 +1014,7 @@ function HoldingEditModal({ fund, holding, onClose, onSave }) {
                   value={share}
                   onChange={(e) => setShare(e.target.value)}
                   placeholder="请输入持有份额"
-                  style={{ 
+                  style={{
                     width: '100%',
                     border: !share ? '1px solid var(--danger)' : undefined
                   }}
@@ -1031,7 +1031,7 @@ function HoldingEditModal({ fund, holding, onClose, onSave }) {
                   value={cost}
                   onChange={(e) => setCost(e.target.value)}
                   placeholder="请输入持仓成本价"
-                  style={{ 
+                  style={{
                     width: '100%',
                     border: !cost ? '1px solid var(--danger)' : undefined
                   }}
@@ -1042,9 +1042,9 @@ function HoldingEditModal({ fund, holding, onClose, onSave }) {
 
           <div className="row" style={{ gap: 12 }}>
             <button type="button" className="button secondary" onClick={onClose} style={{ flex: 1, background: 'rgba(255,255,255,0.05)', color: 'var(--text)' }}>取消</button>
-            <button 
-              type="submit" 
-              className="button" 
+            <button
+              type="submit"
+              className="button"
               disabled={!isValid}
               style={{ flex: 1, opacity: isValid ? 1 : 0.6 }}
             >
@@ -1263,9 +1263,9 @@ function GroupManageModal({ groups, onClose, onSave }) {
             <Reorder.Group axis="y" values={items} onReorder={handleReorder} className="group-manage-list">
               <AnimatePresence mode="popLayout">
                 {items.map((item) => (
-                  <Reorder.Item 
-                    key={item.id} 
-                    value={item} 
+                  <Reorder.Item
+                    key={item.id}
+                    value={item}
                     className="group-manage-item glass"
                     layout
                     initial={{ opacity: 0, scale: 0.98 }}
@@ -1287,16 +1287,16 @@ function GroupManageModal({ groups, onClose, onSave }) {
                       value={item.name}
                       onChange={(e) => handleRename(item.id, e.target.value)}
                       placeholder="请输入分组名称..."
-                      style={{ 
-                        flex: 1, 
-                        height: '36px', 
+                      style={{
+                        flex: 1,
+                        height: '36px',
                         background: 'rgba(0,0,0,0.2)',
                         border: !item.name.trim() ? '1px solid var(--danger)' : 'none'
                       }}
                     />
-                    <button 
-                      className="icon-button danger" 
-                      onClick={() => handleDeleteClick(item.id, item.name)} 
+                    <button
+                      className="icon-button danger"
+                      onClick={() => handleDeleteClick(item.id, item.name)}
                       title="删除分组"
                       style={{ width: '36px', height: '36px', flexShrink: 0 }}
                     >
@@ -1338,9 +1338,9 @@ function GroupManageModal({ groups, onClose, onSave }) {
               所有分组名称均不能为空
             </div>
           )}
-          <button 
-            className="button" 
-            onClick={handleConfirm} 
+          <button
+            className="button"
+            onClick={handleConfirm}
             disabled={!isAllValid}
             style={{ width: '100%', opacity: isAllValid ? 1 : 0.6 }}
           >
@@ -1365,7 +1365,7 @@ function GroupManageModal({ groups, onClose, onSave }) {
 
 function AddFundToGroupModal({ allFunds, currentGroupCodes, onClose, onAdd }) {
   const [selected, setSelected] = useState(new Set());
-  
+
   // 过滤出未在当前分组中的基金
   const availableFunds = (allFunds || []).filter(f => !(currentGroupCodes || []).includes(f.code));
 
@@ -1414,8 +1414,8 @@ function AddFundToGroupModal({ allFunds, currentGroupCodes, onClose, onAdd }) {
           ) : (
             <div className="group-manage-list">
               {availableFunds.map((fund) => (
-                <div 
-                  key={fund.code} 
+                <div
+                  key={fund.code}
                   className={`group-manage-item glass ${selected.has(fund.code) ? 'selected' : ''}`}
                   onClick={() => toggleSelect(fund.code)}
                   style={{ cursor: 'pointer' }}
@@ -1435,9 +1435,9 @@ function AddFundToGroupModal({ allFunds, currentGroupCodes, onClose, onAdd }) {
 
         <div className="row" style={{ marginTop: 24, gap: 12 }}>
           <button className="button secondary" onClick={onClose} style={{ flex: 1, background: 'rgba(255,255,255,0.05)', color: 'var(--text)' }}>取消</button>
-          <button 
-            className="button" 
-            onClick={() => onAdd(Array.from(selected))} 
+          <button
+            className="button"
+            onClick={() => onAdd(Array.from(selected))}
             disabled={selected.size === 0}
             style={{ flex: 1 }}
           >
@@ -1521,10 +1521,10 @@ function CountUp({ value, prefix = '', suffix = '', decimals = 2, className = ''
     const animate = (currentTime) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
+
       // easeOutQuart
       const ease = 1 - Math.pow(1 - progress, 4);
-      
+
       const current = start + (end - start) * ease;
       setDisplayValue(current);
 
@@ -1570,7 +1570,7 @@ function GroupSummary({ funds, holdings, groupName, getProfit }) {
     funds.forEach(fund => {
       const holding = holdings[fund.code];
       const profit = getProfit(fund, holding);
-      
+
       if (profit) {
         hasHolding = true;
         totalAsset += profit.amount;
@@ -1620,8 +1620,8 @@ function GroupSummary({ funds, holdings, groupName, getProfit }) {
         <div style={{ display: 'flex', gap: 24 }}>
           <div style={{ textAlign: 'right' }}>
             <div className="muted" style={{ fontSize: '12px', marginBottom: 4 }}>当日收益</div>
-            <div 
-              className={summary.totalProfitToday > 0 ? 'up' : summary.totalProfitToday < 0 ? 'down' : ''} 
+            <div
+              className={summary.totalProfitToday > 0 ? 'up' : summary.totalProfitToday < 0 ? 'down' : ''}
               style={{ fontSize: '18px', fontWeight: 700, fontFamily: 'var(--font-mono)' }}
             >
               <span style={{ marginRight: 1 }}>{summary.totalProfitToday > 0 ? '+' : summary.totalProfitToday < 0 ? '-' : ''}</span>
@@ -1630,8 +1630,8 @@ function GroupSummary({ funds, holdings, groupName, getProfit }) {
           </div>
           <div style={{ textAlign: 'right' }}>
             <div className="muted" style={{ fontSize: '12px', marginBottom: 4 }}>持有收益{showPercent ? '(%)' : ''}</div>
-            <div 
-              className={summary.totalHoldingReturn > 0 ? 'up' : summary.totalHoldingReturn < 0 ? 'down' : ''} 
+            <div
+              className={summary.totalHoldingReturn > 0 ? 'up' : summary.totalHoldingReturn < 0 ? 'down' : ''}
               style={{ fontSize: '18px', fontWeight: 700, fontFamily: 'var(--font-mono)', cursor: 'pointer' }}
               onClick={() => setShowPercent(!showPercent)}
               title="点击切换金额/百分比"
@@ -1735,7 +1735,7 @@ export default function HomePage() {
       if (e.target.closest('.swipe-action-bg')) {
         return;
       }
-      
+
       if (swipedFundCode) {
         setSwipedFundCode(null);
       }
@@ -1756,7 +1756,7 @@ export default function HomePage() {
   const checkTradingDay = () => {
     const now = new Date();
     const isWeekend = now.getDay() === 0 || now.getDay() === 6;
-    
+
     // 周末直接判定为非交易日
     if (isWeekend) {
       setIsTradingDay(false);
@@ -1775,7 +1775,7 @@ export default function HomePage() {
         if (parts.length > 30) {
           const dateStr = parts[30].slice(0, 8); // 20260205
           const currentStr = todayStr.replace(/-/g, '');
-          
+
           if (dateStr === currentStr) {
             setIsTradingDay(true); // 日期匹配，确认为交易日
           } else {
@@ -1882,6 +1882,9 @@ export default function HomePage() {
         const valB = pb?.profitTotal ?? Number.NEGATIVE_INFINITY;
         return sortOrder === 'asc' ? valA - valB : valB - valA;
       }
+      if(sortBy === 'name'){
+        return sortOrder === 'asc' ? a.name.localeCompare(b.name, 'zh-CN') : b.name.localeCompare(a.name, 'zh-CN');
+      }
       return 0;
     });
 
@@ -1940,16 +1943,16 @@ export default function HomePage() {
   const handleTrade = (fund, data) => {
     const current = holdings[fund.code] || { share: 0, cost: 0 };
     const isBuy = tradeModal.type === 'buy';
-    
+
     let newShare, newCost;
-    
+
     if (isBuy) {
       newShare = current.share + data.share;
-      
+
       // 如果传递了 totalCost（即买入总金额），则用它来计算新成本
       // 否则回退到用 share * price 计算（减仓或旧逻辑）
       const buyCost = data.totalCost !== undefined ? data.totalCost : (data.price * data.share);
-      
+
       // 加权平均成本 = (原持仓成本 * 原份额 + 本次买入总花费) / 新总份额
       // 注意：这里默认将手续费也计入成本（如果 totalCost 包含了手续费）
       newCost = (current.cost * current.share + buyCost) / newShare;
@@ -2247,10 +2250,10 @@ export default function HomePage() {
             if (v) {
               const p = v.split('~');
               // p[5]: 单位净值, p[7]: 涨跌幅, p[8]: 净值日期
-              resolveT({ 
-                dwjz: p[5], 
-                zzl: parseFloat(p[7]), 
-                jzrq: p[8] ? p[8].slice(0, 10) : '' 
+              resolveT({
+                dwjz: p[5],
+                zzl: parseFloat(p[7]),
+                jzrq: p[8] ? p[8].slice(0, 10) : ''
               });
             } else {
               resolveT(null);
@@ -2404,15 +2407,15 @@ export default function HomePage() {
     // 使用 JSONP 方式获取数据，添加 callback 参数
     const callbackName = `SuggestData_${Date.now()}`;
     const url = `https://fundsuggest.eastmoney.com/FundSearch/api/FundSearchAPI.ashx?m=1&key=${encodeURIComponent(val)}&callback=${callbackName}&_=${Date.now()}`;
-    
+
     try {
       await new Promise((resolve, reject) => {
         window[callbackName] = (data) => {
           if (data && data.Datas) {
             // 过滤出基金类型的数据 (CATEGORY 为 700 是公募基金)
-            const fundsOnly = data.Datas.filter(d => 
-              d.CATEGORY === 700 || 
-              d.CATEGORY === "700" || 
+            const fundsOnly = data.Datas.filter(d =>
+              d.CATEGORY === 700 ||
+              d.CATEGORY === "700" ||
               d.CATEGORYDESC === "基金"
             );
             setSearchResults(fundsOnly);
@@ -2462,7 +2465,7 @@ export default function HomePage() {
     if (selectedFunds.length === 0) return;
     setLoading(true);
     setError('');
-    
+
     try {
       const newFunds = [];
       for (const f of selectedFunds) {
@@ -2474,13 +2477,13 @@ export default function HomePage() {
           console.error(`添加基金 ${f.CODE} 失败`, e);
         }
       }
-      
+
       if (newFunds.length > 0) {
         const updated = dedupeByCode([...newFunds, ...funds]);
         setFunds(updated);
         localStorage.setItem('funds', JSON.stringify(updated));
       }
-      
+
       setSelectedFunds([]);
       setSearchTerm('');
       setSearchResults([]);
@@ -2512,7 +2515,7 @@ export default function HomePage() {
           });
         }
       }
-      
+
       if (updated.length > 0) {
         setFunds(prev => {
           // 将更新后的数据合并回当前最新的 state 中，防止覆盖掉刚刚导入的数据
@@ -2543,7 +2546,7 @@ export default function HomePage() {
     setViewMode(nextMode);
     localStorage.setItem('viewMode', nextMode);
   };
- 
+
   const requestRemoveFund = (fund) => {
     const h = holdings[fund.code];
     const hasHolding = h && typeof h.share === 'number' && h.share > 0;
@@ -2809,13 +2812,13 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    const isAnyModalOpen = 
-      settingsOpen || 
-      feedbackOpen || 
-      addResultOpen || 
-      addFundToGroupOpen || 
-      groupManageOpen || 
-      groupModalOpen || 
+    const isAnyModalOpen =
+      settingsOpen ||
+      feedbackOpen ||
+      addResultOpen ||
+      addFundToGroupOpen ||
+      groupManageOpen ||
+      groupModalOpen ||
       successModal.open ||
       holdingModal.open ||
       actionModal.open ||
@@ -2823,23 +2826,23 @@ export default function HomePage() {
       !!clearConfirm ||
       donateOpen ||
       !!fundDeleteConfirm;
-    
+
     if (isAnyModalOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
-    
+
     return () => {
       document.body.style.overflow = '';
     };
   }, [
-    settingsOpen, 
-    feedbackOpen, 
-    addResultOpen, 
-    addFundToGroupOpen, 
-    groupManageOpen, 
-    groupModalOpen, 
+    settingsOpen,
+    feedbackOpen,
+    addResultOpen,
+    addFundToGroupOpen,
+    groupManageOpen,
+    groupModalOpen,
     successModal.open,
     holdingModal.open,
     actionModal.open,
@@ -2909,7 +2912,7 @@ export default function HomePage() {
             <span>添加基金</span>
             <span className="muted">搜索并选择基金（支持名称或代码）</span>
           </div>
-          
+
           <div className="search-container" ref={dropdownRef}>
             <form className="form" onSubmit={addFund}>
               <div className="search-input-wrapper" style={{ flex: 1, gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
@@ -2984,7 +2987,7 @@ export default function HomePage() {
             </AnimatePresence>
           </div>
 
-          
+
 
           {error && <div className="muted" style={{ marginTop: 8, color: 'var(--danger)' }}>{error}</div>}
         </div>
@@ -2992,13 +2995,13 @@ export default function HomePage() {
         <div className="col-12">
           <div className="filter-bar" style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
             <div className="tabs-container">
-              <div 
+              <div
                 className="tabs-scroll-area"
                 data-mask-left={canLeft}
                 data-mask-right={canRight}
               >
-                <div 
-                    className="tabs" 
+                <div
+                    className="tabs"
                     ref={tabsRef}
                     onMouseDown={handleMouseDown}
                     onMouseLeave={handleMouseLeaveOrUp}
@@ -3050,16 +3053,16 @@ export default function HomePage() {
                   </div>
               </div>
               {groups.length > 0 && (
-                <button 
-                  className="icon-button manage-groups-btn" 
+                <button
+                  className="icon-button manage-groups-btn"
                   onClick={() => setGroupManageOpen(true)}
                   title="管理分组"
                 >
                   <SortIcon width="16" height="16" />
                 </button>
               )}
-              <button 
-                className="icon-button add-group-btn" 
+              <button
+                className="icon-button add-group-btn"
                 onClick={() => setGroupModalOpen(true)}
                 title="新增分组"
               >
@@ -3099,6 +3102,7 @@ export default function HomePage() {
                       { id: 'default', label: '默认' },
                       { id: 'yield', label: '涨跌幅' },
                       { id: 'holding', label: '持有收益' },
+                      { id: 'name', label: '名称' },
                     ].map((s) => (
                       <button
                         key={s.id}
@@ -3148,15 +3152,15 @@ export default function HomePage() {
             </div>
           ) : (
             <>
-              <GroupSummary 
-                funds={displayFunds} 
-                holdings={holdings} 
-                groupName={getGroupName()} 
+              <GroupSummary
+                funds={displayFunds}
+                holdings={holdings}
+                groupName={getGroupName()}
                 getProfit={getHoldingProfit}
               />
 
               {currentTab !== 'all' && currentTab !== 'fav' && (
-                <motion.button 
+                <motion.button
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   className="button-dashed"
@@ -3229,7 +3233,7 @@ export default function HomePage() {
                         style={{ position: 'relative', overflow: 'hidden' }}
                       >
                       {viewMode === 'list' && isMobile && (
-                        <div 
+                        <div
                           className="swipe-action-bg"
                           onClick={(e) => {
                             e.stopPropagation(); // 阻止冒泡，防止触发全局收起导致状态混乱
@@ -3242,7 +3246,7 @@ export default function HomePage() {
                           <span>删除</span>
                         </div>
                       )}
-                      <motion.div 
+                      <motion.div
                         className={viewMode === 'card' ? 'glass card' : 'table-row'}
                         drag={viewMode === 'list' && isMobile ? "x" : false}
                         dragConstraints={{ left: -80, right: 0 }}
@@ -3276,17 +3280,17 @@ export default function HomePage() {
                           // 唯一的问题是：点击当前行的“删除按钮”时，会先触发全局 click 导致收起，然后触发删除吗？
                           // 删除按钮在底层，通常不会受影响，因为 React 事件和原生事件的顺序。
                           // 但为了保险，删除按钮的 onClick 应该阻止冒泡。
-                          
+
                           // 如果当前行已展开，点击行内容（非删除按钮）应该收起
                           if (viewMode === 'list' && isMobile && swipedFundCode === f.code) {
                              e.stopPropagation(); // 阻止冒泡，自己处理收起，避免触发全局再次处理
                              setSwipedFundCode(null);
                           }
                         }}
-                        style={{ 
+                        style={{
                           background: viewMode === 'list' ? 'var(--bg)' : undefined,
                           position: 'relative',
-                          zIndex: 1 
+                          zIndex: 1
                         }}
                       >
                         {viewMode === 'list' ? (
@@ -3316,7 +3320,7 @@ export default function HomePage() {
                                 </button>
                               )}
                               <div className="title-text">
-                            <span 
+                            <span
                               className={`name-text ${f.jzrq === todayStr ? 'updated' : ''}`}
                               title={f.jzrq === todayStr ? "今日净值已更新" : ""}
                             >
@@ -3330,7 +3334,7 @@ export default function HomePage() {
                               const isAfter9 = now.getHours() >= 9;
                               const hasTodayData = f.jzrq === todayStr;
                               const shouldHideChange = isTradingDay && isAfter9 && !hasTodayData;
-                              
+
                               if (!shouldHideChange) {
                                 // 如果涨跌幅列显示（即非交易时段或今日净值已更新），则显示单位净值和真实涨跌幅
                                 return (
@@ -3370,7 +3374,7 @@ export default function HomePage() {
                               const amount = profit ? profit.amount : null;
                               if (amount === null) {
                                 return (
-                                  <div 
+                                  <div
                                     className="table-cell text-right holding-amount-cell"
                                     title="设置持仓"
                                     onClick={(e) => { e.stopPropagation(); setHoldingModal({ open: true, fund: f }); }}
@@ -3382,7 +3386,7 @@ export default function HomePage() {
                                 );
                               }
                               return (
-                                <div 
+                                <div
                                   className="table-cell text-right holding-amount-cell"
                                   title="点击设置持仓"
                                   onClick={(e) => { e.stopPropagation(); setActionModal({ open: true, fund: f }); }}
@@ -3404,14 +3408,14 @@ export default function HomePage() {
                               const profit = getHoldingProfit(f, holding);
                               const profitValue = profit ? profit.profitToday : null;
                               const hasProfit = profitValue !== null;
-                              
+
                               return (
                                 <div className="table-cell text-right profit-cell">
-                                  <span 
-                                    className={hasProfit ? (profitValue > 0 ? 'up' : profitValue < 0 ? 'down' : '') : 'muted'} 
+                                  <span
+                                    className={hasProfit ? (profitValue > 0 ? 'up' : profitValue < 0 ? 'down' : '') : 'muted'}
                                     style={{ fontWeight: 700 }}
                                   >
-                                    {hasProfit 
+                                    {hasProfit
                                       ? `${profitValue > 0 ? '+' : profitValue < 0 ? '-' : ''}¥${Math.abs(profitValue).toFixed(2)}`
                                       : ''}
                                   </span>
@@ -3425,15 +3429,15 @@ export default function HomePage() {
                               const principal = holding && holding.cost && holding.share ? holding.cost * holding.share : 0;
                               const asPercent = percentModes[f.code];
                               const hasTotal = total !== null;
-                              const formatted = hasTotal 
-                                ? (asPercent && principal > 0 
+                              const formatted = hasTotal
+                                ? (asPercent && principal > 0
                                   ? `${total > 0 ? '+' : total < 0 ? '-' : ''}${Math.abs((total / principal) * 100).toFixed(2)}%`
                                   : `${total > 0 ? '+' : total < 0 ? '-' : ''}¥${Math.abs(total).toFixed(2)}`)
                                 : '';
                               const cls = hasTotal ? (total > 0 ? 'up' : total < 0 ? 'down' : '') : 'muted';
                               return (
-                                <div 
-                                  className="table-cell text-right holding-cell" 
+                                <div
+                                  className="table-cell text-right holding-cell"
                                   title="点击切换金额/百分比"
                                   onClick={(e) => {
                                     e.stopPropagation();
@@ -3487,7 +3491,7 @@ export default function HomePage() {
                                 </button>
                               )}
                               <div className="title-text">
-                                <span 
+                                <span
                                   className={`name-text ${f.jzrq === todayStr ? 'updated' : ''}`}
                                   title={f.jzrq === todayStr ? "今日净值已更新" : ""}
                                 >
@@ -3523,14 +3527,14 @@ export default function HomePage() {
                               const isAfter9 = now.getHours() >= 9;
                               const hasTodayData = f.jzrq === todayStr;
                               const shouldHideChange = isTradingDay && isAfter9 && !hasTodayData;
-                              
+
                               if (shouldHideChange) return null;
-                              
+
                               return (
-                                <Stat 
-                                  label="涨跌幅" 
+                                <Stat
+                                  label="涨跌幅"
                                   value={f.zzl !== undefined ? `${f.zzl > 0 ? '+' : ''}${Number(f.zzl).toFixed(2)}%` : ''}
-                                  delta={f.zzl} 
+                                  delta={f.zzl}
                                 />
                               );
                             })()}
@@ -3541,18 +3545,18 @@ export default function HomePage() {
                               delta={f.estPricedCoverage > 0.05 ? f.estGszzl : (Number(f.gszzl) || 0)}
                             />
                           </div>
-                          
+
                           <div className="row" style={{ marginBottom: 12 }}>
                             {(() => {
                               const holding = holdings[f.code];
                               const profit = getHoldingProfit(f, holding);
-                              
+
                               if (!profit) {
                                 return (
                                   <div className="stat" style={{ flexDirection: 'column', gap: 4 }}>
                                     <span className="label">持仓金额</span>
-                                    <div 
-                                      className="value muted" 
+                                    <div
+                                      className="value muted"
                                       style={{ fontSize: '14px', display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer' }}
                                       onClick={() => setHoldingModal({ open: true, fund: f })}
                                     >
@@ -3564,8 +3568,8 @@ export default function HomePage() {
 
                               return (
                                 <>
-                                  <div 
-                                    className="stat" 
+                                  <div
+                                    className="stat"
                                     style={{ cursor: 'pointer', flexDirection: 'column', gap: 4 }}
                                     onClick={() => setActionModal({ open: true, fund: f })}
                                   >
@@ -3581,7 +3585,7 @@ export default function HomePage() {
                                     </span>
                                   </div>
                                   {profit.profitTotal !== null && (
-                                    <div 
+                                    <div
                                       className="stat"
                                       onClick={(e) => {
                                         e.stopPropagation();
@@ -3593,7 +3597,7 @@ export default function HomePage() {
                                       <span className="label">持有收益{percentModes[f.code] ? '(%)' : ''}</span>
                                       <span className={`value ${profit.profitTotal > 0 ? 'up' : profit.profitTotal < 0 ? 'down' : ''}`}>
                                         {profit.profitTotal > 0 ? '+' : profit.profitTotal < 0 ? '-' : ''}
-                                        {percentModes[f.code] 
+                                        {percentModes[f.code]
                                           ? `${Math.abs((holding.cost * holding.share) ? (profit.profitTotal / (holding.cost * holding.share)) * 100 : 0).toFixed(2)}%`
                                           : `¥${Math.abs(profit.profitTotal).toFixed(2)}`
                                         }
@@ -3708,7 +3712,7 @@ export default function HomePage() {
               点此提交反馈
             </button>
           </p>
-          <button 
+          <button
             onClick={() => setDonateOpen(true)}
             style={{
               background: 'transparent',
@@ -3732,7 +3736,7 @@ export default function HomePage() {
               e.currentTarget.style.background = 'transparent';
             }}
           >
-            <span>☕</span> 
+            <span>☕</span>
             <span>点此请作者喝杯咖啡</span>
           </button>
         </div>
@@ -3829,7 +3833,7 @@ export default function HomePage() {
                   <CloseIcon width="20" height="20" />
                 </button>
               </div>
-              
+
               <div style={{ marginBottom: 20 }}>
                 <DonateTabs />
               </div>
