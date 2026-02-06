@@ -1,8 +1,6 @@
 # wrangler.toml
 # （放在项目根目录：和 package.json、next.config.js 同级）
 
-$schema = "./node_modules/wrangler/config-schema.json"
-
 name = "real-time-fund"              # 如果提示重名，就改成你自己的唯一名字
 compatibility_date = "2026-02-06"
 
